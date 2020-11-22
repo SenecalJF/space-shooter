@@ -5,26 +5,36 @@ public class Jeu extends BasicGame{
 
     private int x = 266;
     private int y = 500;
+    private int k = x;
+    private int j = y;
     private GameContainer gc;
     Vaisseau vaisseau;
     private ArrayList<Entite> listeEntite = new ArrayList<>();
    private Image imageVaisseau;
    private Image imageBackground;
+    private Image laser1;
+    private SpriteSheet spriteSheetLaser;
 
    public boolean moving = false;
+    private boolean shooting = false;
    public int direction = 2;
 
     public Jeu(String title) {
         super(title);
     }
 
-
+    Laser laser;
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
 
         this.imageVaisseau =new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
         this.imageBackground = new Image("Images/120_Attract.png");
+
+        spriteSheetLaser = new SpriteSheet("Images/beams.png", 25, 25);
+        laser = new Laser(k, j, spriteSheetLaser);
+        listeEntite.add(laser);
+        laser1 = (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
     }
 
     @Override
@@ -45,6 +55,11 @@ public class Jeu extends BasicGame{
                     this.x +=  0.5 * delta;
                     break;
             }
+        }
+        System.out.println(shooting);
+        if (this.shooting) {
+            this.j -= 0.7 * delta;
+
         }
         if ( x<=0 ){
             x = 0;
@@ -67,11 +82,17 @@ public class Jeu extends BasicGame{
 
         // vaisseau spatial
         graphics.drawImage(imageVaisseau, x,y);
+
+        for (Entite entite : listeEntite) {
+            graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
+        }
+        graphics.drawImage(laser1, k + 20, j - 20);
     }
 
-
+    @Override
     public void keyReleased(int key, char c) {
         this.moving = false;
+        this.shooting = true;
         if (Input.KEY_ESCAPE == key) {
             this.gc.exit();
         }
@@ -96,6 +117,10 @@ public class Jeu extends BasicGame{
                 this.direction = 3;
                 this.moving = true;
                 break;
+        }
+
+        if (Input.KEY_SPACE == key) {
+            shooting = true;
         }
     }
 }
