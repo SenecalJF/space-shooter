@@ -92,7 +92,6 @@ public class Jeu extends BasicGame{
     public void keyReleased(int key, char c) {
         this.moving = false;
         this.shooting = true;
-        this.shooting = true;
         if (Input.KEY_ESCAPE == key) {
             this.gc.exit();
         }
