@@ -91,7 +91,6 @@ public class Jeu extends BasicGame{
     @Override
     public void keyReleased(int key, char c) {
         this.moving = false;
-        this.shooting = true;
         if (Input.KEY_ESCAPE == key) {
             this.gc.exit();
         }
@@ -100,19 +99,19 @@ public class Jeu extends BasicGame{
     @Override
     public void keyPressed(int key, char c) {
         switch (key) {
-            case Input.KEY_UP:
+            case Input.KEY_W:
                 this.direction = 0;
                 this.moving = true;
                 break;
-            case Input.KEY_LEFT:
+            case Input.KEY_A:
                 this.direction = 1;
                 this.moving = true;
                 break;
-            case Input.KEY_DOWN:
+            case Input.KEY_S:
                 this.direction = 2;
                 this.moving = true;
                 break;
-            case Input.KEY_RIGHT:
+            case Input.KEY_D:
                 this.direction = 3;
                 this.moving = true;
                 break;
