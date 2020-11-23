@@ -28,6 +28,7 @@ public class Jeu extends BasicGame{
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
 
+
         this.imageVaisseau =new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
         this.imageBackground = new Image("Images/120_Attract.png");
 
@@ -56,10 +57,8 @@ public class Jeu extends BasicGame{
                     break;
             }
         }
-        System.out.println(shooting);
         if (this.shooting) {
             this.j -= 0.7 * delta;
-
         }
         if ( x<=0 ){
             x = 0;
@@ -92,6 +91,7 @@ public class Jeu extends BasicGame{
     @Override
     public void keyReleased(int key, char c) {
         this.moving = false;
+        this.shooting = true;
         this.shooting = true;
         if (Input.KEY_ESCAPE == key) {
             this.gc.exit();
