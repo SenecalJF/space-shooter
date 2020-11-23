@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0368960f-2218-4241-9aec-8528d52fd2f7" name="Default Changelist" comment="rajout en partie du laser">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
     </list>

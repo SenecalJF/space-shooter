@@ -5,13 +5,13 @@ public class Jeu extends BasicGame{
 
     private int x = 266;
     private int y = 500;
-    private int k = x;
+
     private int j = y;
     private GameContainer gc;
     Vaisseau vaisseau;
     private ArrayList<Entite> listeEntite = new ArrayList<>();
-   private Image imageVaisseau;
-   private Image imageBackground;
+    private Image imageVaisseau;
+    private Image imageBackground;
     private Image laser1;
     private SpriteSheet spriteSheetLaser;
 
@@ -23,7 +23,7 @@ public class Jeu extends BasicGame{
         super(title);
     }
 
-    Laser laser;
+    private Laser laser;
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
@@ -33,9 +33,10 @@ public class Jeu extends BasicGame{
         this.imageBackground = new Image("Images/120_Attract.png");
 
         spriteSheetLaser = new SpriteSheet("Images/beams.png", 25, 25);
-        laser = new Laser(k, j, spriteSheetLaser);
-        listeEntite.add(laser);
+        laser = new Laser(x, y, spriteSheetLaser);
         laser1 = (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
+
+        listeEntite.add(laser);
     }
 
     @Override
@@ -58,6 +59,7 @@ public class Jeu extends BasicGame{
             }
         }
         if (this.shooting) {
+j = y;
             this.j -= 0.7 * delta;
         }
         if ( x<=0 ){
@@ -85,7 +87,7 @@ public class Jeu extends BasicGame{
         for (Entite entite : listeEntite) {
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
         }
-        graphics.drawImage(laser1, k + 20, j - 20);
+        graphics.drawImage(laser1, x + 20, j - 20);
     }
 
     @Override
