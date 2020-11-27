@@ -4,7 +4,7 @@ public class MainClass {
 
     public static final int LARGEUR = 600, HAUTEUR = 700;
     public static void main(String[] args){
-
+        System.out.println("LANCEMENT");
         try {
             AppGameContainer app = new AppGameContainer(new Jeu("SS TEMP"));
             app.setDisplayMode(LARGEUR, HAUTEUR, false);

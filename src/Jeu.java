@@ -27,7 +27,7 @@ public class Jeu extends BasicGame{
     }
 
     private Laser laser;
-    private Asteroide
+    private Asteroide asteroide;
 
 
     @Override
