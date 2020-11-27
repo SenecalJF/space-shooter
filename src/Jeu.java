@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import org.newdawn.slick.*;
 
-public class Jeu extends BasicGame{
+public class Jeu extends BasicGame {
+
+    //YOOOOOOOOOOOO CA MARCHE
 
     private int x = 266;
     private int y = 500;
@@ -10,8 +12,8 @@ public class Jeu extends BasicGame{
     private GameContainer gc;
     Vaisseau vaisseau;
     private ArrayList<Entite> listeEntite = new ArrayList<>();
-   private Image imageVaisseau;
-   private Image imageBackground;
+    private Image imageVaisseau;
+    private Image imageBackground;
     private Image laser1;
     private SpriteSheet spriteSheetLaser;
 
