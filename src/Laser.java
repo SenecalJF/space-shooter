@@ -17,11 +17,9 @@ public class Laser extends Entite {
         return vitesse;
     }
 
-    public int getPositionY() {
-        return y;
+    public Image getImage() throws SlickException {
+        return (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
     }
 
-    public int getPositionX() {
-        return x;
-    }
+
 }

@@ -82,9 +82,8 @@ public class Jeu extends BasicGame{
         }
         if (this.shooting) {
 
+            laser.setLocation(j, k -= laser.getVitesse() * delta);
 
-
-            this.k -= laser.getVitesse() * delta;
         }
 
     }
@@ -100,14 +99,16 @@ public class Jeu extends BasicGame{
         for (Entite entite : listeEntite) {
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
         }
-        if (shooting) {
 
-            graphics.drawImage(laser1, j + 20, k - 20);
-        }
     }
+
+
     @Override
     public void keyReleased(int key, char c) {
         this.moving = false;
+        if (Input.KEY_SPACE == key) {
+            this.shooting = true;
+        }
 
         if (Input.KEY_ESCAPE == key) {
             this.gc.exit();
@@ -137,17 +138,11 @@ public class Jeu extends BasicGame{
 
         if (Input.KEY_SPACE == key) {
             this.shooting = true;
-            j = x;
-            k = y;
+            j = x + 20;
+            k = y - 20;
             laser = new Laser(j, k, spriteSheetLaser);
-            //listeEntite.add(laser);
 
-            try {
-                laser1 = (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
-            } catch (SlickException e) {
-                e.printStackTrace();
-            }
-
+            listeEntite.add(laser);
 
         }
     }
