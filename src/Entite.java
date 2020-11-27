@@ -2,6 +2,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+import java.awt.*;
 import java.sql.SQLOutput;
 
 public class Entite {
@@ -28,5 +29,9 @@ public class Entite {
 
     public float getY() {
         return y;
+    }
+
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, width, length);
     }
 }
