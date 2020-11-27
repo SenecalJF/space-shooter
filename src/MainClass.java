@@ -2,7 +2,7 @@ import org.newdawn.slick.*;
 
 public class MainClass {
 
-    private static final int LARGEUR = 600, HAUTEUR = 700;
+    public static final int LARGEUR = 600, HAUTEUR = 700;
     public static void main(String[] args){
 
         try {

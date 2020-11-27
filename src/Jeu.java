@@ -5,8 +5,11 @@ public class Jeu extends BasicGame{
 
     private int x = 266;
     private int y = 500;
-
-    private int j = y;
+    private int j;
+    private int k;
+    private int Hauteur = MainClass.HAUTEUR;
+    private int Largeur = MainClass.LARGEUR;
+    //private int j = y;
     private GameContainer gc;
     Vaisseau vaisseau;
     private ArrayList<Entite> listeEntite = new ArrayList<>();
@@ -24,6 +27,8 @@ public class Jeu extends BasicGame{
     }
 
     private Laser laser;
+    private Asteroide
+
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
@@ -33,10 +38,8 @@ public class Jeu extends BasicGame{
         this.imageBackground = new Image("Images/120_Attract.png");
 
         spriteSheetLaser = new SpriteSheet("Images/beams.png", 25, 25);
-        laser = new Laser(x, y, spriteSheetLaser);
-        laser1 = (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
+        // laser = new Laser(x, y, spriteSheetLaser);
 
-        listeEntite.add(laser);
     }
 
     @Override
@@ -45,35 +48,42 @@ public class Jeu extends BasicGame{
         if (this.moving){
             switch (this.direction){
                 case 0:
-                    this.y -= 0.5 * delta;
+                    //haut
+                    if (y <= 0) {
+                        y = 0;
+                    } else
+                        this.y -= 0.5 * delta;
                     break;
                 case 1:
-                    this.x -=  0.5 * delta;
+                    //gauche
+                    if (x <= 0) {
+                        x = 0;
+                    } else
+                        this.x -=  0.5 * delta;
                     break;
                 case 2:
-                    this.y +=  0.5 * delta;
+                    //bas
+                    if (y >= Hauteur - imageVaisseau.getHeight()) {
+                        y = Hauteur - imageVaisseau.getHeight();
+                    } else
+                        this.y +=  0.5 * delta;
                     break;
                 case 3:
-                    this.x +=  0.5 * delta;
+                    //droite
+                    if (x >= Largeur - imageVaisseau.getWidth()) {
+                        x = Largeur - imageVaisseau.getWidth();
+                    } else
+                        this.x +=  0.5 * delta;
                     break;
             }
         }
         if (this.shooting) {
-j = y;
-            this.j -= 0.7 * delta;
+
+            System.out.println(j);
+
+            this.k -= laser.getVitesse() * delta;
         }
-        if ( x<=0 ){
-            x = 0;
-        }
-        if (x >= 517){
-            x = 517;
-        }
-        if (y <= 0){
-            y = 0;
-        }
-        if (y >= 575){
-            y = 575;
-        }
+
     }
 
     @Override
@@ -87,12 +97,15 @@ j = y;
         for (Entite entite : listeEntite) {
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
         }
-        graphics.drawImage(laser1, x + 20, j - 20);
-    }
+        if (shooting) {
 
+            graphics.drawImage(laser1, j + 20, k - 20);
+        }
+    }
     @Override
     public void keyReleased(int key, char c) {
         this.moving = false;
+
         if (Input.KEY_ESCAPE == key) {
             this.gc.exit();
         }
@@ -120,7 +133,19 @@ j = y;
         }
 
         if (Input.KEY_SPACE == key) {
-            shooting = true;
+            this.shooting = true;
+            j = x;
+            k = y;
+            laser = new Laser(j, k, spriteSheetLaser);
+            //listeEntite.add(laser);
+
+            try {
+                laser1 = (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
 }
