@@ -16,6 +16,7 @@ public class Jeu extends BasicGame{
     private Image imageVaisseau;
     private Image imageBackground;
     private Image laser1;
+    private Image AsteroidG;
     private SpriteSheet spriteSheetLaser;
 
    public boolean moving = false;
@@ -36,6 +37,8 @@ public class Jeu extends BasicGame{
 
         this.imageVaisseau =new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
         this.imageBackground = new Image("Images/120_Attract.png");
+        this.AsteroidG = new Image("Images/asteroids/large/a10012.png");
+
 
         spriteSheetLaser = new SpriteSheet("Images/beams.png", 25, 25);
         // laser = new Laser(x, y, spriteSheetLaser);
@@ -79,7 +82,7 @@ public class Jeu extends BasicGame{
         }
         if (this.shooting) {
 
-            System.out.println(j);
+
 
             this.k -= laser.getVitesse() * delta;
         }
