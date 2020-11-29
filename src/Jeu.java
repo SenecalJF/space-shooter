@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+
 import org.newdawn.slick.*;
 
-public class Jeu extends BasicGame{
+public class Jeu extends BasicGame {
 
     private int x = 266;
     private int y = 500;
@@ -15,19 +16,24 @@ public class Jeu extends BasicGame{
     private ArrayList<Entite> listeEntite = new ArrayList<>();
     private Image imageVaisseau;
     private Image imageBackground;
+    private Image imageBackground2;
+    private int deplacementImage = 0;
+    private int deplacementImage2 = -15;
     private Image laser1;
-    private Image AsteroidG;
+    private Image AsteroidM;
     private SpriteSheet spriteSheetLaser;
 
-   public boolean moving = false;
+    public boolean moving = false;
     private boolean shooting = false;
-   public int direction = 2;
+    public int direction = 2;
+
 
     public Jeu(String title) {
         super(title);
     }
 
     private Laser laser;
+    private int yDepart = 0;
     private Asteroide asteroide;
 
 
@@ -35,21 +41,27 @@ public class Jeu extends BasicGame{
     public void init(GameContainer gameContainer) throws SlickException {
 
 
-        this.imageVaisseau =new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
+        this.imageVaisseau = new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
         this.imageBackground = new Image("Images/120_Attract.png");
-        this.AsteroidG = new Image("Images/asteroids/large/a10012.png");
+        this.imageBackground2 = new Image("Images/120_Attract.png");
+
+        this.AsteroidM = new Image("Images/asteroids/medium/a10012.png");
+
+        //  asteroide = new Asteroide(0,0,120,120,AsteroidM);
+        //    for (int i = 0; i <= 5 ; i++){
+        //      listeEntite.add(new Asteroide(30 * i, 49 * i, 120,120,AsteroidM ));
+        //   }
 
 
         spriteSheetLaser = new SpriteSheet("Images/beams.png", 25, 25);
-        // laser = new Laser(x, y, spriteSheetLaser);
 
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-        if (this.moving){
-            switch (this.direction){
+        if (this.moving) {
+            switch (this.direction) {
                 case 0:
                     //haut
                     if (y <= 0) {
@@ -62,28 +74,29 @@ public class Jeu extends BasicGame{
                     if (x <= 0) {
                         x = 0;
                     } else
-                        this.x -=  0.5 * delta;
+                        this.x -= 0.5 * delta;
                     break;
                 case 2:
                     //bas
                     if (y >= Hauteur - imageVaisseau.getHeight()) {
                         y = Hauteur - imageVaisseau.getHeight();
                     } else
-                        this.y +=  0.5 * delta;
+                        this.y += 0.5 * delta;
                     break;
                 case 3:
                     //droite
                     if (x >= Largeur - imageVaisseau.getWidth()) {
                         x = Largeur - imageVaisseau.getWidth();
                     } else
-                        this.x +=  0.5 * delta;
+                        this.x += 0.5 * delta;
                     break;
             }
+
         }
         if (this.shooting) {
-
-            laser.setLocation(j, k -= laser.getVitesse() * delta);
-
+            for (Entite entite : listeEntite) {
+                entite.update(delta);
+            }
         }
 
     }
@@ -91,14 +104,27 @@ public class Jeu extends BasicGame{
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         //background
-        graphics.drawImage(imageBackground,0,0);
+
+        //tentative de loop qui marche pas
+        //  deplacementImage += 1f;
+        //  deplacementImage2 += 1f;
+
+        graphics.drawImage(imageBackground, 0, deplacementImage);
+        // graphics.drawImage(imageBackground2,0, deplacementImage2);
+
+
+
+
 
         // vaisseau spatial
-        graphics.drawImage(imageVaisseau, x,y);
+        graphics.drawImage(imageVaisseau, x, y);
+
 
         for (Entite entite : listeEntite) {
+            System.out.println(entite);
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
         }
+
 
     }
 
@@ -140,8 +166,8 @@ public class Jeu extends BasicGame{
             this.shooting = true;
             j = x + 20;
             k = y - 20;
-            laser = new Laser(j, k, spriteSheetLaser);
-
+            yDepart = k;
+            laser = new Laser(j, k, spriteSheetLaser, yDepart);
             listeEntite.add(laser);
 
         }

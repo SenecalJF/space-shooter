@@ -1,8 +1,11 @@
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 public class Asteroide extends Entite {
 
-    public Asteroide(int x, int y, SpriteSheet spriteSheet, int ligne, int columns) {
-        super(x, y, spriteSheet, ligne, columns);
+    public Asteroide(int x, int y, int width, int height, Image imagepath) {
+        super(x, y, width, height, imagepath);
     }
+
+
 }

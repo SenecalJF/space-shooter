@@ -10,7 +10,7 @@ public class Entite {
     protected Image image;
     protected boolean detruire = false;
 
-    public Entite(int x, int y, int width, int height, String imagepath) {
+    public Entite(int x, int y, int width, int height, Image imagepath) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -64,5 +64,9 @@ public class Entite {
     public void setDetruire() throws SlickException {
         //if (getDetruire())
         this.image.destroy();
+    }
+
+    public void update(int delta) {
+
     }
 }
