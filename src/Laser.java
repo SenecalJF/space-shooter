@@ -25,18 +25,17 @@ public class Laser extends Entite {
     }
 
     @Override
-    public void update(int delta) {
+    public void update(int delta, int direction) {
+        if (direction == 0)
         y -= vitesse * delta;
     }
 
     @Override
     public boolean getDetruire() {
-        if (y == 0 || y - yDepart >= 350) {
+        if (y <= 0 || yDepart - y >= 350) {
+            System.out.println(y);
             detruire = true;
-        } else {
-            detruire = false;
         }
-
         return detruire;
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.*;
 
@@ -22,6 +23,7 @@ public class Jeu extends BasicGame {
     private Image laser1;
     private Image AsteroidM;
     private SpriteSheet spriteSheetLaser;
+    private SpriteSheet spriteSheetAstroid;
 
     public boolean moving = false;
     private boolean shooting = false;
@@ -36,6 +38,8 @@ public class Jeu extends BasicGame {
     private int yDepart = 0;
     private Asteroide asteroide;
 
+    private Random random = new Random();
+
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
@@ -47,10 +51,16 @@ public class Jeu extends BasicGame {
 
         this.AsteroidM = new Image("Images/asteroids/medium/a10012.png");
 
+        // spriteSheetAstroid = new SpriteSheet(AsteroidM, 120,120);
+
         //  asteroide = new Asteroide(0,0,120,120,AsteroidM);
-        //    for (int i = 0; i <= 5 ; i++){
-        //      listeEntite.add(new Asteroide(30 * i, 49 * i, 120,120,AsteroidM ));
-        //   }
+        for (int i = 0; i <= 5; i++) {
+
+            int x1 = random.nextInt(500);
+            int y1 = random.nextInt(500);
+
+            listeEntite.add(new Asteroide(x1, y1, 120, 120, AsteroidM));
+        }
 
 
         spriteSheetLaser = new SpriteSheet("Images/beams.png", 25, 25);
@@ -92,12 +102,23 @@ public class Jeu extends BasicGame {
                     break;
             }
 
+            int direction = 0; // 0 est up, 1 est gauche, 2 est bas, 3 est droite
+            // asteroide.update(delta, direction);
+
         }
-        if (this.shooting) {
+
             for (Entite entite : listeEntite) {
-                entite.update(delta);
+                if (this.shooting && entite instanceof Laser) {
+                    entite.update(delta, 0);
+                } else if (entite instanceof Asteroide) {
+                    direction = random.nextInt(5);
+                    entite.update(delta, direction);
+                }
+
+
+
             }
-        }
+
 
     }
 
@@ -120,9 +141,18 @@ public class Jeu extends BasicGame {
         graphics.drawImage(imageVaisseau, x, y);
 
 
-        for (Entite entite : listeEntite) {
-            System.out.println(entite);
+        for (int i = 0; i < listeEntite.size(); i++) {
+            Entite entite = listeEntite.get(i);
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
+            if (entite instanceof Laser) {
+                if (entite.getDetruire()) {
+                    listeEntite.remove(i);
+                }
+            }
+
+           /* if (entite.getRectangle().intersects(asteroide.getRectangle())){
+                graphics.drawString("collision", 50,50);
+            }*/
         }
 
 

@@ -15,6 +15,7 @@ public class Entite {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.image = imagepath;
     }
 
 
@@ -66,7 +67,7 @@ public class Entite {
         this.image.destroy();
     }
 
-    public void update(int delta) {
+    public void update(int delta, int direction) {
 
     }
 }
