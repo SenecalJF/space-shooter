@@ -133,10 +133,6 @@ public class Jeu extends BasicGame {
         graphics.drawImage(imageBackground, 0, deplacementImage);
         // graphics.drawImage(imageBackground2,0, deplacementImage2);
 
-
-
-
-
         // vaisseau spatial
         graphics.drawImage(imageVaisseau, x, y);
 

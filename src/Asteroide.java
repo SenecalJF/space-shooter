@@ -7,7 +7,6 @@ public class Asteroide extends Entite {
     public Asteroide(int x, int y, int width, int height, Image imagepath) {
         super(x, y, width, height, imagepath);
 
-
     }
 
     @Override
@@ -15,7 +14,6 @@ public class Asteroide extends Entite {
         if (x > MainClass.LARGEUR - 120) {
             direction = 1;
         }
-
 
         if (x < 50) {
             direction = 3;
@@ -26,11 +24,9 @@ public class Asteroide extends Entite {
             direction = 0;
         }
 
-
         if (y < 50) {
             direction = 2;
         }
-
 
         if (direction == 2) {
             y -= 0.1 * delta;
