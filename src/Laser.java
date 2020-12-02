@@ -26,7 +26,6 @@ public class Laser extends Entite {
 
     @Override
     public void update(int delta) {
-
         y -= vitesse * delta;
     }
 

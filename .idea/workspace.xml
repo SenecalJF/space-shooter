@@ -19,19 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0368960f-2218-4241-9aec-8528d52fd2f7" name="Default Changelist" comment="">
+    <list default="true" id="0368960f-2218-4241-9aec-8528d52fd2f7" name="Default Changelist" comment="Réparation des déplacements d'astéroides et du vaisseau &#10;Spawn d'astéroides ajouté">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/MainClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/MainClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Asteroide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Laser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Laser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vaisseau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vaisseau.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606443430904</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Réparation des déplacements d'astéroides et du vaisseau &#10;Spawn d'astéroides ajouté">
+      <created>1606875709153</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606875709153</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,7 +146,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="rajout en partie du laser" />
     <MESSAGE value="creation de quelques classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="creation de quelques classes" />
+    <MESSAGE value="Réparation des déplacements d'astéroides et du vaisseau &#10;Spawn d'astéroides ajouté" />
+    <option name="LAST_COMMIT_MESSAGE" value="Réparation des déplacements d'astéroides et du vaisseau &#10;Spawn d'astéroides ajouté" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -160,21 +163,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606863576009" />
-    <state width="746" height="210" key="GridCell.Tab.0.bottom" timestamp="1606875352441">
+    <state width="746" height="210" key="GridCell.Tab.0.bottom" timestamp="1606878618523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606875352441" />
-    <state width="746" height="210" key="GridCell.Tab.0.center" timestamp="1606875352441">
+    <state width="746" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606878618523" />
+    <state width="746" height="210" key="GridCell.Tab.0.center" timestamp="1606878618523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606875352441" />
-    <state width="746" height="210" key="GridCell.Tab.0.left" timestamp="1606875352441">
+    <state width="746" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606878618523" />
+    <state width="746" height="210" key="GridCell.Tab.0.left" timestamp="1606878618523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606875352441" />
-    <state width="746" height="210" key="GridCell.Tab.0.right" timestamp="1606875352441">
+    <state width="746" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606878618523" />
+    <state width="746" height="210" key="GridCell.Tab.0.right" timestamp="1606878618523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606875352441" />
+    <state width="746" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606878618523" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606875722465">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606875722465" />
   </component>
 </project>

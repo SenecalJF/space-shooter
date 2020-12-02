@@ -21,7 +21,9 @@ public class Jeu extends BasicGame {
     private int deplacementImage = 0;
     private int deplacementImage2 = -15;
     private Image laser1;
+    private Image AsteroidL;
     private Image AsteroidM;
+    private Image AsteroidS;
     private SpriteSheet spriteSheetLaser;
     private SpriteSheet spriteSheetAstroid;
     double nouvelAsteroideReady;
@@ -50,17 +52,14 @@ public class Jeu extends BasicGame {
         listeEntite.add(vaisseau);
         this.imageBackground = new Image("Images/120_Attract.png");
         this.imageBackground2 = new Image("Images/120_Attract.png");
+        this.AsteroidL = new Image("Images/asteroids/large/a10000.png");
         this.AsteroidM = new Image("Images/asteroids/medium/a10012.png");
-
+        this.AsteroidS = new Image("Images/asteroids/small/a10000.png");
         // spriteSheetAstroid = new SpriteSheet(AsteroidM, 120,120);
 
         //  asteroide = new Asteroide(0,0,120,120,AsteroidM);
         for (int i = 0; i <= 5; i++) {
-
-            int x1 = random.nextInt(500);
-            int y1 = random.nextInt(500);
-
-            listeEntite.add(new Asteroide(x1, y1, 120, 120, AsteroidM));
+            spawnAsteroideRandom();
         }
 
 
@@ -78,7 +77,7 @@ public class Jeu extends BasicGame {
         // Parce que sinon les deplacements d'asteroides et du vaisseau se derangeaient
 
         if (spawnAsteroideReady(delta)) {
-            spawnAsteroide();
+            spawnAsteroideRandom();
         }
 
         for (Entite entite : listeEntite) {
@@ -125,7 +124,20 @@ public class Jeu extends BasicGame {
 
     @Override
     public void keyReleased(int key, char c) {
-        this.moving = false;
+
+        switch (key) {
+            case Input.KEY_W:
+            case Input.KEY_UP:
+            case Input.KEY_D:
+            case Input.KEY_RIGHT:
+            case Input.KEY_A:
+            case Input.KEY_LEFT:
+            case Input.KEY_S:
+            case Input.KEY_DOWN:
+                this.moving = false;
+                break;
+        }
+
         if (Input.KEY_SPACE == key) {
             this.shooting = true;
         }
@@ -183,10 +195,39 @@ public class Jeu extends BasicGame {
         return false;
     }
 
-    public void spawnAsteroide() {
+    public void spawnAsteroideRandom() {
+        int tailleRandom = random.nextInt(3);
+        switch (tailleRandom) {
+            case 0:
+                spawnAsteroideLarge();
+                break;
+            case 1:
+                spawnAsteroideMedium();
+                break;
+            case 2:
+                spawnAsteroideSmall();
+                break;
+        }
+
+    }
+
+    public void spawnAsteroideLarge() {
         int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
         int spawnY = random.nextInt(100);
-        listeEntite.add(new Asteroide(spawnX, spawnY, 120, 120, AsteroidM));
+        listeEntite.add(new Asteroide(spawnX, spawnY, AsteroidL.getWidth(), AsteroidL.getHeight(), AsteroidL));
     }
+
+    public void spawnAsteroideMedium() {
+        int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
+        int spawnY = random.nextInt(100);
+        listeEntite.add(new Asteroide(spawnX, spawnY, AsteroidM.getWidth(), AsteroidM.getHeight(), AsteroidM));
+    }
+
+    public void spawnAsteroideSmall() {
+        int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
+        int spawnY = random.nextInt(100);
+        listeEntite.add(new Asteroide(spawnX, spawnY, AsteroidS.getWidth(), AsteroidS.getHeight(), AsteroidS));
+    }
+
 
 }

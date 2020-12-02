@@ -1,5 +1,4 @@
 import org.newdawn.slick.Image;
-
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -35,15 +34,15 @@ public class Asteroide extends Entite {
     public void update(int delta) {
 
         this.deplacementY += this.vitesseDescente * delta;
-        if (deplacementY >= 1) {                                     //ca permet des vitesses plus petites que 1 pixel/update
+        if (deplacementY >= 1) {                            //ca permet des vitesses plus petites que 1 pixel/update
             this.y++;
             this.deplacementY = 0;
         }
 
 
         if (this.directionAsteroide == 0) {
-            if (this.x >= MainClass.LARGEUR - this.width) {
-                this.directionAsteroide = 1;
+            if (this.x >= MainClass.LARGEUR - this.width) {         // la hitbox des asteroides est tellement large que
+                this.directionAsteroide = 1;                        // les collisions de bord d'ecran sont nazes
             } else {
                 this.x += Math.round(delta * 0.08);
             }
@@ -55,7 +54,6 @@ public class Asteroide extends Entite {
                 this.x -= Math.round(delta * 0.08);
             }
         }
-
     }
 
 
