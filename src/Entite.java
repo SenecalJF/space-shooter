@@ -70,4 +70,7 @@ public class Entite {
     public void update(int delta, int direction) {
 
     }
+
+    public void update(int delta) {
+    }
 }

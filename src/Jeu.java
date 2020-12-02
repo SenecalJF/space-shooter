@@ -5,10 +5,10 @@ import org.newdawn.slick.*;
 
 public class Jeu extends BasicGame {
 
-    private int x = 266;
-    private int y = 500;
-    private int j;
-    private int k;
+    private int vaisseauX = 266;
+    private int vaisseauY = 500;
+    private int laserX;
+    private int laserY;
     private int Hauteur = MainClass.HAUTEUR;
     private int Largeur = MainClass.LARGEUR;
     //private int j = y;
@@ -21,16 +21,19 @@ public class Jeu extends BasicGame {
     private int deplacementImage = 0;
     private int deplacementImage2 = -15;
     private Image laser1;
+    private Image AsteroidL;
     private Image AsteroidM;
+    private Image AsteroidS;
     private SpriteSheet spriteSheetLaser;
     private SpriteSheet spriteSheetAstroid;
+    double nouvelAsteroideReady;
 
     public boolean moving = false;
     private boolean shooting = false;
-    public int direction = 2;
+    public int directionVaisseau = 2;
 
 
-    public Jeu(String title) {
+    public Jeu(String title) throws SlickException {
         super(title);
     }
 
@@ -44,22 +47,19 @@ public class Jeu extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
 
-
-        this.imageVaisseau = new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
+        this.imageVaisseau = new Image("Images/shiper_mix_03.png");//devrait marcher pour toi aussi ce repertory
+        this.vaisseau = new Vaisseau(vaisseauX, vaisseauY, imageVaisseau.getWidth(), imageVaisseau.getHeight(), imageVaisseau);
+        listeEntite.add(vaisseau);
         this.imageBackground = new Image("Images/120_Attract.png");
         this.imageBackground2 = new Image("Images/120_Attract.png");
-
-        this.AsteroidM = new Image("Images/asteroids/medium/a10012.png");
-
+        this.AsteroidL = new Image("Images/asteroids/large/Grand0.png");
+        this.AsteroidM = new Image("Images/asteroids/medium/Moyen0.png");
+        this.AsteroidS = new Image("Images/asteroids/small/Small0.png");
         // spriteSheetAstroid = new SpriteSheet(AsteroidM, 120,120);
 
         //  asteroide = new Asteroide(0,0,120,120,AsteroidM);
         for (int i = 0; i <= 5; i++) {
-
-            int x1 = random.nextInt(500);
-            int y1 = random.nextInt(500);
-
-            listeEntite.add(new Asteroide(x1, y1, 120, 120, AsteroidM));
+            spawnAsteroideRandom();
         }
 
 
@@ -70,54 +70,24 @@ public class Jeu extends BasicGame {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-        if (this.moving) {
-            switch (this.direction) {
-                case 0:
-                    //haut
-                    if (y <= 0) {
-                        y = 0;
-                    } else
-                        this.y -= 0.5 * delta;
-                    break;
-                case 1:
-                    //gauche
-                    if (x <= 0) {
-                        x = 0;
-                    } else
-                        this.x -= 0.5 * delta;
-                    break;
-                case 2:
-                    //bas
-                    if (y >= Hauteur - imageVaisseau.getHeight()) {
-                        y = Hauteur - imageVaisseau.getHeight();
-                    } else
-                        this.y += 0.5 * delta;
-                    break;
-                case 3:
-                    //droite
-                    if (x >= Largeur - imageVaisseau.getWidth()) {
-                        x = Largeur - imageVaisseau.getWidth();
-                    } else
-                        this.x += 0.5 * delta;
-                    break;
-            }
+        this.vaisseauX = this.vaisseau.deplacementVaisseauX(this.moving, directionVaisseau, delta);
+        this.vaisseauY = this.vaisseau.deplacementVaisseauY(this.moving, directionVaisseau, delta);
+        this.vaisseau.setLocation(vaisseauX, vaisseauY);
+        // J'ai change pour que les deplacements soient traites individuellement
+        // Parce que sinon les deplacements d'asteroides et du vaisseau se derangeaient
 
-            int direction = 0; // 0 est up, 1 est gauche, 2 est bas, 3 est droite
-            // asteroide.update(delta, direction);
-
+        if (spawnAsteroideReady(delta)) {
+            spawnAsteroideRandom();
         }
 
-            for (Entite entite : listeEntite) {
-                if (this.shooting && entite instanceof Laser) {
-                    entite.update(delta, 0);
-                } else if (entite instanceof Asteroide) {
-                    direction = random.nextInt(5);
-                    entite.update(delta, direction);
-                }
-
-
-
+        for (Entite entite : listeEntite) {
+            if (entite instanceof Laser) {
+                entite.update(delta);          //J'ai enleve la direction des laser puisque c'est tjs vers le haut anyways
             }
+            if (entite instanceof Asteroide) {
+                entite.update(delta);          //deplacement des asteroides est dans classe asteroide
+            }
+        }
 
 
     }
@@ -133,8 +103,9 @@ public class Jeu extends BasicGame {
         graphics.drawImage(imageBackground, 0, deplacementImage);
         // graphics.drawImage(imageBackground2,0, deplacementImage2);
 
+
         // vaisseau spatial
-        graphics.drawImage(imageVaisseau, x, y);
+        graphics.drawImage(imageVaisseau, vaisseauX, vaisseauY);
 
 
         for (int i = 0; i < listeEntite.size(); i++) {
@@ -157,7 +128,20 @@ public class Jeu extends BasicGame {
 
     @Override
     public void keyReleased(int key, char c) {
-        this.moving = false;
+
+        switch (key) {
+            case Input.KEY_W:
+            case Input.KEY_UP:
+            case Input.KEY_D:
+            case Input.KEY_RIGHT:
+            case Input.KEY_A:
+            case Input.KEY_LEFT:
+            case Input.KEY_S:
+            case Input.KEY_DOWN:
+                this.moving = false;
+                break;
+        }
+
         if (Input.KEY_SPACE == key) {
             this.shooting = true;
         }
@@ -171,31 +155,83 @@ public class Jeu extends BasicGame {
     public void keyPressed(int key, char c) {
         switch (key) {
             case Input.KEY_W:
-                this.direction = 0;
+            case Input.KEY_UP:
+                this.directionVaisseau = 0;
                 this.moving = true;
                 break;
             case Input.KEY_A:
-                this.direction = 1;
+            case Input.KEY_LEFT:
+                this.directionVaisseau = 1;
                 this.moving = true;
                 break;
             case Input.KEY_S:
-                this.direction = 2;
+            case Input.KEY_DOWN:
+                this.directionVaisseau = 2;
                 this.moving = true;
                 break;
             case Input.KEY_D:
-                this.direction = 3;
+            case Input.KEY_RIGHT:
+                this.directionVaisseau = 3;
                 this.moving = true;
                 break;
         }
 
         if (Input.KEY_SPACE == key) {
             this.shooting = true;
-            j = x + 20;
-            k = y - 20;
-            yDepart = k;
-            laser = new Laser(j, k, spriteSheetLaser, yDepart);
+            laserX = (int) vaisseauX + 20;
+            laserY = (int) vaisseauY - 20;
+            yDepart = laserY;
+            laser = new Laser(laserX, laserY, spriteSheetLaser, yDepart);
             listeEntite.add(laser);
 
         }
     }
+
+
+    public boolean spawnAsteroideReady(int delta) {
+        double tempsRecharge = 0.00025;
+        nouvelAsteroideReady += tempsRecharge * delta;     //temps de recharge change le temps entre le spawn d'asteroide
+        if (nouvelAsteroideReady >= 1) {
+            nouvelAsteroideReady = 0;
+            System.out.println("apparition asteroide");
+            return true;
+        }
+        return false;
+    }
+
+    public void spawnAsteroideRandom() {
+        int tailleRandom = random.nextInt(3);
+        switch (tailleRandom) {
+            case 0:
+                spawnAsteroideLarge();
+                break;
+            case 1:
+                spawnAsteroideMedium();
+                break;
+            case 2:
+                spawnAsteroideSmall();
+                break;
+        }
+
+    }
+
+    public void spawnAsteroideLarge() {
+        int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
+        int spawnY = random.nextInt(100);
+        listeEntite.add(new Asteroide(spawnX, spawnY, AsteroidL.getWidth(), AsteroidL.getHeight(), AsteroidL));
+    }
+
+    public void spawnAsteroideMedium() {
+        int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
+        int spawnY = random.nextInt(100);
+        listeEntite.add(new Asteroide(spawnX, spawnY, AsteroidM.getWidth(), AsteroidM.getHeight(), AsteroidM));
+    }
+
+    public void spawnAsteroideSmall() {
+        int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
+        int spawnY = random.nextInt(100);
+        listeEntite.add(new Asteroide(spawnX, spawnY, AsteroidS.getWidth(), AsteroidS.getHeight(), AsteroidS));
+    }
+
+
 }
