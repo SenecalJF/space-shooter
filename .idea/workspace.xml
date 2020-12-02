@@ -570,7 +570,8 @@
     <MESSAGE value="creation de quelques classes" />
     <MESSAGE value="Le laser fonctionne, il faut faire les astéroids et pouvoir les tirer avec le laser" />
     <MESSAGE value="élimination du laser, ajout des asteroids mais ils bougent bizarrement" />
-    <option name="LAST_COMMIT_MESSAGE" value="élimination du laser, ajout des asteroids mais ils bougent bizarrement" />
+    <MESSAGE value="Merge branch 'changeJF' of https://github.com/SenecalJF/ca.qc.bdeb.203.TP2.collab into changeJF&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Entite.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Laser.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Vaisseau.class&#10;&#9;src/Asteroide.java&#10;&#9;src/Jeu.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'changeJF' of https://github.com/SenecalJF/ca.qc.bdeb.203.TP2.collab into changeJF&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Entite.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Laser.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Vaisseau.class&#10;&#9;src/Asteroide.java&#10;&#9;src/Jeu.java" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
