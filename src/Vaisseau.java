@@ -1,7 +1,7 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Vaisseau extends Entite {
+public class Vaisseau extends Entite implements Collisionnable {
     private float vaisseauX = 266;
     private float vaisseauY = 500;
     private int Hauteur = MainClass.HAUTEUR;
