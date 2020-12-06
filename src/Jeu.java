@@ -93,9 +93,9 @@ public class Jeu extends BasicGame {
             if (entite instanceof Laser) {
                 entite.update(delta);          //J'ai enleve la direction des laser puisque c'est tjs vers le haut anyways
             }
-            directionAsteroid = random.nextInt(4);
+
             if (entite instanceof Asteroide) {
-                entite.update(delta, directionAsteroid); //deplacement des asteroides est dans classe asteroide
+                entite.update(delta); //deplacement des asteroides est dans classe asteroide
 
             }
         }
