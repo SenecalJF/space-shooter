@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_2020-12-01_17_55_[Default_Changelist]" date="1606863374781" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020-12-01_17_55_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2020-12-01 17:55 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ca.qc.bdeb.203.TP2/Jeu.class" />
+    <option name="AFTER_PATH" value="out/production/ca.qc.bdeb.203.TP2/Jeu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020-12-01_17_55_[Default_Changelist]/Jeu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ca.qc.bdeb.203.TP2/MainClass.class" />
+    <option name="AFTER_PATH" value="out/production/ca.qc.bdeb.203.TP2/MainClass.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020-12-01_17_55_[Default_Changelist]/MainClass.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ca.qc.bdeb.203.TP2/Laser.class" />
+    <option name="AFTER_PATH" value="out/production/ca.qc.bdeb.203.TP2/Laser.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020-12-01_17_55_[Default_Changelist]/Laser.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ca.qc.bdeb.203.TP2/Entite.class" />
+    <option name="AFTER_PATH" value="out/production/ca.qc.bdeb.203.TP2/Entite.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020-12-01_17_55_[Default_Changelist]/Entite.class" />
+  </binary>
+</changelist>
