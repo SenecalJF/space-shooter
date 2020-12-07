@@ -17,9 +17,14 @@ public class Jeu extends BasicGame {
     private ArrayList<Entite> listeEntite = new ArrayList<>();
     private ArrayList<Destructible> listeDestructible = new ArrayList<>();
     private ArrayList<Collisionnable> listeCollisionnable = new ArrayList<>();
+    private ArrayList<Image> listeVie = new ArrayList<>();
+    private ArrayList<Image> listeRecolte = new ArrayList<>();
     private Image imageVaisseau;
     private Image imageBackground;
     private Image imageBackground2;
+    private Image healthBar3, healthBar2, healthBar1;
+    private Image recolteBar1, recolteBar2, recolteBar3, recolteBar4, recolteBar5;
+
     private int deplacementImage = 0;
     private int imgBackHeight = 0;
     private int deplacementImage2 = 0;
@@ -55,7 +60,7 @@ public class Jeu extends BasicGame {
         this.imageVaisseau = new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
         this.vaisseau = new Vaisseau(vaisseauX, vaisseauY, imageVaisseau.getWidth(), imageVaisseau.getHeight(), imageVaisseau);
         listeEntite.add(vaisseau);
-        listeCollisionnable.add(vaisseau);
+        //listeCollisionnable.add(vaisseau);
         this.imageBackground = new Image("Images/120_Attract.png");
         imgBackHeight = imageBackground.getHeight();
         this.imageBackground2 = new Image("Images/120_Attract.png");
@@ -65,8 +70,17 @@ public class Jeu extends BasicGame {
         System.out.println(AsteroidL.getHeight());
 
 
+        listeVie.add(this.healthBar3 = new Image("Images/healthBar/BAR3.png"));
+        listeVie.add(this.healthBar2 = new Image("Images/healthBar/BAR2.png"));
+        listeVie.add(this.healthBar1 = new Image("Images/healthBar/BAR1.png"));
+        listeRecolte.add(this.recolteBar1 = new Image("Images/recolteBar/BAR1.png"));
+        listeRecolte.add(this.recolteBar2 = new Image("Images/recolteBar/BAR2.png"));
+        listeRecolte.add(this.recolteBar3 = new Image("Images/recolteBar/BAR3.png"));
+        listeRecolte.add(this.recolteBar4 = new Image("Images/recolteBar/BAR4.png"));
+        listeRecolte.add(this.recolteBar5 = new Image("Images/recolteBar/BAR5.png"));
 
-        for (int i = 0; i <= 5; i++) {
+
+        for (int i = 0; i <= 1; i++) {
             spawnAsteroideRandom();
         }
 
@@ -106,6 +120,7 @@ public class Jeu extends BasicGame {
 
         }*/
 
+
     }
 
     @Override
@@ -125,6 +140,9 @@ public class Jeu extends BasicGame {
         graphics.drawImage(imageVaisseau, vaisseauX, vaisseauY);
 
 
+        graphics.drawImage(healthBar3, 30, 650);
+        graphics.drawImage(recolteBar4, 450, 660);
+
         for (int i = 0; i < listeEntite.size(); i++) {
             Entite entite = listeEntite.get(i);
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
@@ -133,13 +151,12 @@ public class Jeu extends BasicGame {
                     listeEntite.remove(i);
                 }
             }
-
+            collision(graphics);
            /* if (entite.getRectangle().intersects(asteroide.getRectangle())){
                 graphics.drawString("collision", 50,50);
             }*/
         }
 
-        collision(graphics);
     }
 
 
@@ -205,6 +222,10 @@ public class Jeu extends BasicGame {
             listeCollisionnable.add(laser);
 
         }
+
+        if (Input.KEY_E == key) {
+            System.out.println("EJECTED");
+        }
     }
 
 
@@ -256,7 +277,7 @@ public class Jeu extends BasicGame {
     }
 
 
-    public void collision(Graphics graphics) {
+    public void collision(Graphics graphics) throws SlickException {
 
         Entite laser = null;
         Entite asteroid = null;
@@ -268,14 +289,45 @@ public class Jeu extends BasicGame {
                         asteroid = listeEntite.get(j);
                         // System.out.println(listeEntite.get(j).getRectangle());
                         if (laser.getRectangle().intersects(asteroid.getRectangle())) {
-                            graphics.drawString("collision", 50, 50);
+                            // graphics.drawString("collision", 50, 50);
+                            if (asteroid.getWidth() > 64)
+                                listeEntite.get(i).setDetruire();
+                            separatioAsteroid(j, i);
+
+
                         }
                     }
 
-
                 }
             }
+
         }
     }
 
+    public void separatioAsteroid(int j, int i) throws SlickException {
+        if (listeEntite.get(j).getImage() == AsteroidL) {
+            listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), AsteroidM.getWidth(), AsteroidM.getHeight(), AsteroidM));
+            listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), AsteroidM.getWidth(), AsteroidM.getHeight(), AsteroidM));
+            listeEntite.remove(j);
+
+        } else if (listeEntite.get(j).getImage() == AsteroidM) {
+            System.out.println(AsteroidM);
+            listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), AsteroidS.getWidth(), AsteroidS.getHeight(), AsteroidS));
+            listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), AsteroidS.getWidth(), AsteroidS.getHeight(), AsteroidS));
+            listeEntite.remove(j);
+
+        }
+
+
+    }
+
 }
+
+//modification de l'health bar, je vais l'arranger plus tard
+/*if (listeEntite.get(i) instanceof Asteroide && listeEntite.get(i).getImage() == AsteroidM || listeEntite.get(i).getImage() == AsteroidL) {
+
+            if (vaisseau.getRectangle().intersects(listeEntite.get(i).getRectangle())){
+                healthBar3.destroy();
+                graphics.drawImage(healthBar2,50,650);
+            }
+        }*/

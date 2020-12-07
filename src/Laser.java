@@ -6,7 +6,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Laser extends Entite implements Collisionnable {
 
-    private double vitesse = 0.5;
+    private double vitesse = 0.2;
     private Vector2f position;
     int yDepart = 0;
 

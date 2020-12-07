@@ -64,7 +64,7 @@ public class Entite {
 
     public void setDetruire() throws SlickException {
         //if (getDetruire())
-        this.image.destroy();
+        this.detruire = true;
     }
 
     public void update(int delta, int direction) {
