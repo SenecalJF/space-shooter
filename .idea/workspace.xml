@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="" />
+    <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Images/healthBar/BAR1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/healthBar/BAR2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/healthBar/BAR3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/recolteBar/BAR1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/recolteBar/BAR2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/recolteBar/BAR3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/recolteBar/BAR4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/recolteBar/BAR5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Laser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Laser.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +50,10 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Images/recolteBar" />
+      <recent name="$PROJECT_DIR$/Images/healthBar" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Images" />
     </key>
