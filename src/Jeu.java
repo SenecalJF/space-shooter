@@ -230,7 +230,7 @@ public class Jeu extends BasicGame {
 
 
     public boolean spawnAsteroideReady(int delta) {
-        double tempsRecharge = 0.00025;
+        double tempsRecharge = 0.0025;
         nouvelAsteroideReady += tempsRecharge * delta;     //temps de recharge change le temps entre le spawn d'asteroide
         if (nouvelAsteroideReady >= 1) {
             nouvelAsteroideReady = 0;

@@ -1,5 +1,6 @@
 import org.newdawn.slick.Image;
 
+import java.awt.*;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -57,5 +58,9 @@ public class Asteroide extends Entite implements Collisionnable {
         }
     }
 
+    @Override
+    public Rectangle getRectangle() {
 
+        return new Rectangle(x, y, this.width / 2, this.height / 2);
+    }
 }
