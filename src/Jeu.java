@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 import org.newdawn.slick.*;
+
+import javax.swing.*;
 
 public class Jeu extends BasicGame {
 
@@ -14,9 +17,9 @@ public class Jeu extends BasicGame {
     private GameContainer gc;
     Vaisseau vaisseau;
     private ArrayList<Entite> listeEntite = new ArrayList<>();
-    private ArrayList<Destructible> listeDestructible = new ArrayList<>();
     private ArrayList<Collisionnable> listeCollisionnable = new ArrayList<>();
-    private ArrayList<Image> listeVie = new ArrayList<>();
+    private ArrayList<Entite> aSuprimer = new ArrayList<>();
+    private ArrayList<Collisionnable> aAjouter = new ArrayList<>();
     private ArrayList<Image> listeRecolte = new ArrayList<>();
     private Image imageVaisseau;
     private Image imageBackground;
@@ -59,7 +62,7 @@ public class Jeu extends BasicGame {
         this.vaisseau = new Vaisseau(vaisseauX, vaisseauY, imageVaisseau.getWidth(), imageVaisseau.getHeight(), imageVaisseau);
 
         listeEntite.add(vaisseau);
-        //listeCollisionnable.add(vaisseau);
+        listeCollisionnable.add(vaisseau);
         this.imageBackground = new Image("Images/120_Attract.png");
         imgBackHeight = imageBackground.getHeight();
         this.imageBackground2 = new Image("Images/120_Attract.png");
@@ -112,11 +115,13 @@ public class Jeu extends BasicGame {
         // J'ai change pour que les deplacements soient traites individuellement
         // Parce que sinon les deplacements d'asteroides et du vaisseau se derangeaient
 
+        deplacementImage += 0.10f * delta;
         this.vaisseau.perteInvincibilite(delta);
 
         if (spawnAsteroideReady(delta)) {
             spawnAsteroideRandom();
         }
+
 
         for (Entite entite : listeEntite) {
             if (entite instanceof Laser) {
@@ -129,30 +134,29 @@ public class Jeu extends BasicGame {
             }
         }
 
+        listeCollisionnable.removeAll(aSuprimer);
+        aSuprimer.clear();
+        listeCollisionnable.addAll(aAjouter);
+        aAjouter.clear();
+
 
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         //background
-        //tentative de loop qui marche pas
-
-
-        graphics.drawImage(imageBackground, 0, deplacementImage);
-        /*if (descendre) {
-            graphics.drawImage(imageBackground, 0, deplacementImage2);
-
-        }*/
-
+        defilerBackground(graphics);
 
         // vaisseau spatial
         graphics.drawImage(imageVaisseau, vaisseauX, vaisseauY);
 
+        //bar de vie
         if (this.vaisseau.getHealthBar() == null) {
         } else {
             graphics.drawImage(this.vaisseau.getHealthBar(), 30, 650);
         }
 
+        //bar de points
         if (this.vaisseau.getRecolteBar() == null) {
         } else {
             graphics.drawImage(this.vaisseau.getRecolteBar(), 450, 650);
@@ -163,14 +167,22 @@ public class Jeu extends BasicGame {
         for (int i = 0; i < listeEntite.size(); i++) {
             Entite entite = listeEntite.get(i);
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
-            // if (entite instanceof Laser) {
             if (entite.getDetruire()) {
+                aSuprimer.add(listeEntite.get(i));
                 listeEntite.remove(i);
             }
-            // }
             collision(graphics);
 
+            if (vaisseau.getNbVie() == 0) {
+                if (JOptionPane.showConfirmDialog(null, "Vous n'avez plus de vie malheureusement.\n Voulez-vous recommencer?", "Nouveau Départ", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    //Determiner comment faire recommancer le jeu
+                } else {
+                    System.exit(0);
+                }
+            }
+
         }
+
     }
 
 
@@ -227,6 +239,8 @@ public class Jeu extends BasicGame {
         Entite laser = null;
         Entite asteroid = null;
         Entite vaisseau = null;
+        int aireAsteroid = 0;
+        int aireVaisseau = 0;
         for (int i = 0; i < listeEntite.size(); i++) {
             for (int j = 0; j < listeEntite.size(); j++) {
                 if (i != j) {
@@ -243,13 +257,13 @@ public class Jeu extends BasicGame {
                         vaisseau = listeEntite.get(i);
                         asteroid = listeEntite.get(j);
                         if (vaisseau.getRectangle().intersects(asteroid.getRectangle())) {
-                            int aireAsteroid = (asteroid.getWidth()) * (asteroid.getHeight());
-                            int aireVaisseau = (vaisseau.getHeight()) * (vaisseau.getWidth());
+                            aireAsteroid = (asteroid.getWidth()) * (asteroid.getHeight());
+                            aireVaisseau = (vaisseau.getHeight()) * (vaisseau.getWidth());
+
                             if (aireAsteroid < aireVaisseau) {
                                 listeEntite.get(j).setDetruire();
                                 this.vaisseau.gainRecolte(aireAsteroid / 2);
-
-                            } else if (aireAsteroid >= aireVaisseau) {
+                            } else {
                                 listeEntite.get(j).setDetruire();
                                 this.vaisseau.perteVie();
 
@@ -258,29 +272,44 @@ public class Jeu extends BasicGame {
                     }
                 }
             }
-
         }
     }
+
 
     public void separatioAsteroid(int j, int i) throws SlickException {
         if (listeEntite.get(j).getImage() == asteroidL) {
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), 128, 128, asteroidm));
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), 128, 128, asteroidm));
             listeEntite.remove(j);
+            aSuprimer.add(listeEntite.get(j));
+            aAjouter.add((Collisionnable) listeEntite.get(listeEntite.size() - 1));
+            aAjouter.add((Collisionnable) listeEntite.get(listeEntite.size() - 2));
 
         } else if (listeEntite.get(j).getImage() == asteroidm) {
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), asteroidS.getWidth(), asteroidS.getHeight(), asteroidS));
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), asteroidS.getWidth(), asteroidS.getHeight(), asteroidS));
             listeEntite.remove(j);
+            aSuprimer.add(listeEntite.get(j));
+            aAjouter.add((Collisionnable) listeEntite.get(listeEntite.size() - 1));
+            aAjouter.add((Collisionnable) listeEntite.get(listeEntite.size() - 2));
 
         } else if (listeEntite.get(j).getImage() == asteroidS) {
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), asteroidXS.getWidth(), asteroidXS.getHeight(), asteroidXS));
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), asteroidXS.getWidth(), asteroidXS.getHeight(), asteroidXS));
             listeEntite.remove(j);
+            aSuprimer.add(listeEntite.get(j));
+            aAjouter.add((Collisionnable) listeEntite.get(listeEntite.size() - 1));
+            aAjouter.add((Collisionnable) listeEntite.get(listeEntite.size() - 2));
 
         }
+    }
 
-
+    private void defilerBackground(Graphics graphics) {
+        for (int i = 0; i < Largeur; i = i + 600) {
+            for (long j = deplacementImage % 700 - 700; j < Hauteur; j = j + 700) {
+                graphics.drawImage(imageBackground, i, j);
+            }
+        }
     }
 
     @Override
@@ -351,18 +380,4 @@ public class Jeu extends BasicGame {
         }
     }
 
-
-    private void modificationFood() {
-
-    }
 }
-
-
-//modification de l'health bar, je vais l'arranger plus tard
-/*if (listeEntite.get(i) instanceof Asteroide && listeEntite.get(i).getImage() == asteroidm || listeEntite.get(i).getImage() == asteroidL) {
-
-            if (vaisseau.getRectangle().intersects(listeEntite.get(i).getRectangle())){
-                healthBar3.destroy();
-                graphics.drawImage(healthBar2,50,650);
-            }
-        }*/

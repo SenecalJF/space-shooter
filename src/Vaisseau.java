@@ -92,7 +92,7 @@ public class Vaisseau extends Entite implements Collisionnable {
         if (!invincible) {
             this.nbVie--;
             invincible = true;
-            System.out.println("perte de vie");
+
         }
 
     }

@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Images/vaisseau.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/shiper_mix_02.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Collisionnable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Collisionnable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/MainClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/MainClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Collisionnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Collisionnable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Vaisseau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vaisseau.java" afterDir="false" />

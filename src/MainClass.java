@@ -21,9 +21,10 @@ public class MainClass {
 /*Ce qu'il reste à faire
   FAIT Spritesheet d'une image de coeur et afficher les coeurs en fonction de la vie restante
   FAIT spritesheet d'une image de nourriture minecraft et les afficher graduellement jusqu'à temps que le vaisseau est plein
-  - Defiller l'écran continnuellement
-  - Patron Observateur + MVC pour afficher la cargaison envoyé sur mars
+  FAIT Defiller l'écran continnuellement
+  FAIT Patron Observateur + MVC pour afficher la cargaison envoyé sur mars
   - Gestion de la mémoire
+  - Faire recommencer le JEU lorsque ça fini
   -
 */
 
