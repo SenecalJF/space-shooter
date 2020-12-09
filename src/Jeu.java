@@ -11,7 +11,9 @@ public class Jeu extends BasicGame {
     private int laserY;
     private int Hauteur = MainClass.HAUTEUR;
     private int Largeur = MainClass.LARGEUR;
-    //private int j = y;
+    private int mineraiCollecter = 0;
+    private int capaciterVaisseau = 128 ^ 2;
+    private boolean capaciterAtteinte;
     private GameContainer gc;
     Vaisseau vaisseau;
     private ArrayList<Entite> listeEntite = new ArrayList<>();
@@ -30,12 +32,10 @@ public class Jeu extends BasicGame {
     private int deplacementImage2 = 0;
     private boolean descendre = false;
     private Image laser1;
-    private Image AsteroidL;
-    private Image AsteroidM;
-    private Image AsteroidS;
+    private Image AsteroidL, AsteroidM, AsteroidS, AsteroidXS;
     private SpriteSheet spriteSheetLaser;
     private SpriteSheet spriteSheetAstroid;
-    double nouvelAsteroideReady;
+    private double nouvelAsteroideReady;
 
     public boolean moving = false;
     private boolean shooting = false;
@@ -57,8 +57,10 @@ public class Jeu extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
 
-        this.imageVaisseau = new Image("Images/shiper_mix_03.png"); //devrait marcher pour toi aussi ce repertory
+
+        this.imageVaisseau = new Image("Images/vaisseau.png"); //devrait marcher pour toi aussi ce repertory
         this.vaisseau = new Vaisseau(vaisseauX, vaisseauY, imageVaisseau.getWidth(), imageVaisseau.getHeight(), imageVaisseau);
+
         listeEntite.add(vaisseau);
         //listeCollisionnable.add(vaisseau);
         this.imageBackground = new Image("Images/120_Attract.png");
@@ -67,7 +69,8 @@ public class Jeu extends BasicGame {
         this.AsteroidL = new Image("Images/asteroids/large/Grand0.png");
         this.AsteroidM = new Image("Images/asteroids/medium/Moyen0.png");
         this.AsteroidS = new Image("Images/asteroids/small/Small0.png");
-        System.out.println(AsteroidL.getHeight());
+        this.AsteroidXS = new Image("Images/asteroids/Xsmall/Xsmall0.png");
+
 
 
         listeVie.add(this.healthBar3 = new Image("Images/healthBar/BAR3.png"));
@@ -113,12 +116,6 @@ public class Jeu extends BasicGame {
 
             }
         }
-        /*deplacementImage += 1f;
-        if (deplacementImage >= 0){
-            deplacementImage2 += 1f;
-            descendre = true;
-
-        }*/
 
 
     }
@@ -146,17 +143,14 @@ public class Jeu extends BasicGame {
         for (int i = 0; i < listeEntite.size(); i++) {
             Entite entite = listeEntite.get(i);
             graphics.drawImage(entite.getImage(), entite.getX(), entite.getY());
-            if (entite instanceof Laser) {
-                if (entite.getDetruire()) {
-                    listeEntite.remove(i);
-                }
+            // if (entite instanceof Laser) {
+            if (entite.getDetruire()) {
+                listeEntite.remove(i);
             }
+            // }
             collision(graphics);
-           /* if (entite.getRectangle().intersects(asteroide.getRectangle())){
-                graphics.drawString("collision", 50,50);
-            }*/
-        }
 
+        }
     }
 
 
@@ -212,7 +206,7 @@ public class Jeu extends BasicGame {
 
         if (Input.KEY_SPACE == key) {
             this.shooting = true;
-            laserX = (int) vaisseauX + 20;
+            laserX = (int) vaisseauX + 47;
             laserY = (int) vaisseauY - 20;
             yDepart = laserY;
             laser = new Laser(laserX, laserY, spriteSheetLaser, yDepart);
@@ -224,13 +218,13 @@ public class Jeu extends BasicGame {
         }
 
         if (Input.KEY_E == key) {
-            System.out.println("EJECTED");
+            capaciterVaisseau = 0;
         }
     }
 
 
     public boolean spawnAsteroideReady(int delta) {
-        double tempsRecharge = 0.0025;
+        double tempsRecharge = 0.0015;
         nouvelAsteroideReady += tempsRecharge * delta;     //temps de recharge change le temps entre le spawn d'asteroide
         if (nouvelAsteroideReady >= 1) {
             nouvelAsteroideReady = 0;
@@ -277,27 +271,42 @@ public class Jeu extends BasicGame {
     }
 
 
+
     public void collision(Graphics graphics) throws SlickException {
 
         Entite laser = null;
         Entite asteroid = null;
+        Entite vaisseau = null;
         for (int i = 0; i < listeEntite.size(); i++) {
             for (int j = 0; j < listeEntite.size(); j++) {
                 if (i != j) {
                     if (listeEntite.get(i) instanceof Laser && listeEntite.get(j) instanceof Asteroide) {
                         laser = listeEntite.get(i);
                         asteroid = listeEntite.get(j);
-                        // System.out.println(listeEntite.get(j).getRectangle());
                         if (laser.getRectangle().intersects(asteroid.getRectangle())) {
-                            // graphics.drawString("collision", 50, 50);
                             if (asteroid.getWidth() > 64)
                                 listeEntite.get(i).setDetruire();
                             separatioAsteroid(j, i);
-
-
                         }
                     }
+                    if (listeEntite.get(i) instanceof Vaisseau && listeEntite.get(j) instanceof Asteroide && !capaciterAtteinte) {
+                        vaisseau = listeEntite.get(i);
+                        asteroid = listeEntite.get(j);
+                        if (vaisseau.getRectangle().intersects(asteroid.getRectangle())) {
+                            int aireAsteroid = (asteroid.getWidth() + 5) * (asteroid.getHeight() + 5);
+                            int aireVaisseau = (vaisseau.getHeight()) * (vaisseau.getWidth());
+                            if (aireAsteroid < aireVaisseau) {
+                                listeEntite.get(j).setDetruire();
+                                this.mineraiCollecter += aireAsteroid / 2;
+                                if (capaciterVaisseau >= 5) {
+                                    graphics.drawString("atteinte", 50, 50);
+                                    capaciterAtteinte = true;
+                                }
+                            } else {
 
+                            }
+                        }
+                    }
                 }
             }
 
@@ -311,9 +320,13 @@ public class Jeu extends BasicGame {
             listeEntite.remove(j);
 
         } else if (listeEntite.get(j).getImage() == AsteroidM) {
-            System.out.println(AsteroidM);
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), AsteroidS.getWidth(), AsteroidS.getHeight(), AsteroidS));
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), AsteroidS.getWidth(), AsteroidS.getHeight(), AsteroidS));
+            listeEntite.remove(j);
+
+        } else if (listeEntite.get(j).getImage() == AsteroidS) {
+            listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), AsteroidXS.getWidth(), AsteroidXS.getHeight(), AsteroidXS));
+            listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), AsteroidXS.getWidth(), AsteroidXS.getHeight(), AsteroidXS));
             listeEntite.remove(j);
 
         }
@@ -321,7 +334,12 @@ public class Jeu extends BasicGame {
 
     }
 
+    private void modificationFood() {
+
+    }
 }
+
+
 
 //modification de l'health bar, je vais l'arranger plus tard
 /*if (listeEntite.get(i) instanceof Asteroide && listeEntite.get(i).getImage() == AsteroidM || listeEntite.get(i).getImage() == AsteroidL) {
