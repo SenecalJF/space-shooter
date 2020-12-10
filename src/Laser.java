@@ -11,24 +11,43 @@ public class Laser extends Entite implements Collisionnable {
     int yDepart = 0;
 
 
+    /**
+     * @param x           position en x du laser
+     * @param y           position en y du laser
+     * @param spriteSheet
+     * @param yDepart     la position en y du départ de laser
+     */
     public Laser(int x, int y, SpriteSheet spriteSheet, int yDepart) {
         super(x, y, spriteSheet, 0, 0);
         position = new Vector2f(x, y);
         this.yDepart = yDepart;
     }
 
+    /**
+     * @return la vitesse du laser
+     */
     public double getVitesse() {
         return vitesse;
     }
 
+    /**
+     * @return sprite sheet du laser
+     * @throws SlickException
+     */
     public Image getImage() throws SlickException {
         return (new SpriteSheet("Images/beams.png", 25, 25)).getSubImage(0, 0);
     }
 
+    /**
+     * @param width largeur du laser
+     */
     public void setWidth(int width) {
         this.width = width;
     }
 
+    /**
+     * @param height hauteur du laser
+     */
     public void setHeight(int height) {
         this.height = height;
     }

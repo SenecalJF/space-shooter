@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Random;
 
 import org.newdawn.slick.*;
@@ -14,48 +13,54 @@ public class Jeu extends BasicGame {
     private int laserY;
     private int Hauteur = MainClass.HAUTEUR;
     private int Largeur = MainClass.LARGEUR;
+
     private GameContainer gc;
-    Vaisseau vaisseau;
+    private Vaisseau vaisseau;
+    public boolean moving = false;
+    public int directionVaisseau = 2;
+    private Laser laser;
+    private int yDepart = 0;
+    private boolean shooting = false;
+
+    //arrayliste
     private ArrayList<Entite> listeEntite = new ArrayList<>();
     private ArrayList<Collisionnable> listeCollisionnable = new ArrayList<>();
     private ArrayList<Entite> aSuprimer = new ArrayList<>();
     private ArrayList<Collisionnable> aAjouter = new ArrayList<>();
     private ArrayList<Image> listeRecolte = new ArrayList<>();
+    //image
     private Image imageVaisseau;
     private Image imageBackground;
-    private Image imageBackground2;
-    private Image healthBar3, healthBar2, healthBar1;
-    private Image recolteBar1, recolteBar2, recolteBar3, recolteBar4, recolteBar5;
-
-    private int deplacementImage = 0;
-    private int imgBackHeight = 0;
-    private int deplacementImage2 = 0;
-    private boolean descendre = false;
-    private Image laser1;
     private Image asteroidL, asteroidm, asteroidS, asteroidXS;
     private SpriteSheet spriteSheetLaser;
-    private SpriteSheet spriteSheetAstroid;
+
+
+    private int deplacementImage = 0; //background
+
+
     private double nouvelAsteroideReady;
 
-    public boolean moving = false;
-    private boolean shooting = false;
-    public int directionVaisseau = 2;
-    private int directionAsteroid = 1;
+    Sound snd;
 
-
+    /**
+     * @param title titre de la page du jeu
+     * @throws SlickException
+     */
     public Jeu(String title) throws SlickException {
         super(title);
     }
 
-    private Laser laser;
-    private int yDepart = 0;
-    private Asteroide asteroide;
+
+    //private Asteroide asteroide;
 
     private Random random = new Random();
 
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
+
+        snd = new Sound("Sound/SpaceSound.wav");
+        snd.loop();
 
 
         this.imageVaisseau = new Image("Images/vaisseau.png"); //devrait marcher pour toi aussi ce repertory
@@ -64,8 +69,6 @@ public class Jeu extends BasicGame {
         listeEntite.add(vaisseau);
         listeCollisionnable.add(vaisseau);
         this.imageBackground = new Image("Images/120_Attract.png");
-        imgBackHeight = imageBackground.getHeight();
-        this.imageBackground2 = new Image("Images/120_Attract.png");
         this.asteroidL = new Image("Images/asteroidS/large/Grand0.png");
         this.asteroidm = new Image("Images/asteroidS/medium/Moyen0.png");
         this.asteroidS = new Image("Images/asteroidS/small/Small0.png");
@@ -80,23 +83,10 @@ public class Jeu extends BasicGame {
         System.out.println("largeur S : " + asteroidS.getWidth());
         System.out.println("hauteur S: " + asteroidS.getHeight());
 
-        /*
-        listeVie.add(this.healthBar3 = new Image("Images/healthBar/BAR3.png"));
-        listeVie.add(this.healthBar2 = new Image("Images/healthBar/BAR2.png"));
-        listeVie.add(this.healthBar1 = new Image("Images/healthBar/BAR1.png"));
-        listeRecolte.add(this.recolteBar1 = new Image("Images/recolteBar/BAR1.png"));
-        listeRecolte.add(this.recolteBar2 = new Image("Images/recolteBar/BAR2.png"));
-        listeRecolte.add(this.recolteBar3 = new Image("Images/recolteBar/BAR3.png"));
-        listeRecolte.add(this.recolteBar4 = new Image("Images/recolteBar/BAR4.png"));
-        listeRecolte.add(this.recolteBar5 = new Image("Images/recolteBar/BAR5.png"));
-        */
 
         //J'ai mit la vie et la recolte dans la classe vaisseau, les methodes getHealth et getRecolte vont retourner les images
 
-        /*for (int i = 0; i <= 3; i++) {
-            spawnAsteroideRandom();
-        }
-*/
+
         spawnAsteroideLarge();
         spawnAsteroideLarge();
         spawnAsteroideLarge();
@@ -112,10 +102,8 @@ public class Jeu extends BasicGame {
         this.vaisseauX = this.vaisseau.deplacementVaisseauX(this.moving, directionVaisseau, delta);
         this.vaisseauY = this.vaisseau.deplacementVaisseauY(this.moving, directionVaisseau, delta);
         this.vaisseau.setLocation(vaisseauX, vaisseauY);
-        // J'ai change pour que les deplacements soient traites individuellement
-        // Parce que sinon les deplacements d'asteroides et du vaisseau se derangeaient
 
-        deplacementImage += 0.10f * delta;
+        deplacementImage += 0.1f * delta;
         this.vaisseau.perteInvincibilite(delta);
 
         if (spawnAsteroideReady(delta)) {
@@ -125,15 +113,16 @@ public class Jeu extends BasicGame {
 
         for (Entite entite : listeEntite) {
             if (entite instanceof Laser) {
-                entite.update(delta);          //J'ai enleve la direction des laser puisque c'est tjs vers le haut anyways
+                entite.update(delta);
             }
 
             if (entite instanceof Asteroide) {
-                entite.update(delta); //deplacement des asteroides est dans classe asteroide
+                entite.update(delta);
 
             }
         }
 
+        collision();
         listeCollisionnable.removeAll(aSuprimer);
         aSuprimer.clear();
         listeCollisionnable.addAll(aAjouter);
@@ -171,11 +160,14 @@ public class Jeu extends BasicGame {
                 aSuprimer.add(listeEntite.get(i));
                 listeEntite.remove(i);
             }
-            collision(graphics);
+
 
             if (vaisseau.getNbVie() == 0) {
                 if (JOptionPane.showConfirmDialog(null, "Vous n'avez plus de vie malheureusement.\n Voulez-vous recommencer?", "Nouveau Départ", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    //Determiner comment faire recommancer le jeu
+                    listeEntite.removeAll(listeEntite);
+                    listeCollisionnable.removeAll(listeCollisionnable);
+                    listeRecolte.removeAll(listeRecolte);
+                    init(gameContainer);
                 } else {
                     System.exit(0);
                 }
@@ -186,8 +178,12 @@ public class Jeu extends BasicGame {
     }
 
 
+    /**
+     * @param delta donné changeante
+     * @return
+     */
     public boolean spawnAsteroideReady(int delta) {
-        double tempsRecharge = 0.00015;
+        double tempsRecharge = 0.00030;
         nouvelAsteroideReady += tempsRecharge * delta;     //temps de recharge change le temps entre le spawn d'asteroide
         if (nouvelAsteroideReady >= 1) {
             nouvelAsteroideReady = 0;
@@ -196,6 +192,9 @@ public class Jeu extends BasicGame {
         return false;
     }
 
+    /**
+     * Faire apparaitre des asteroid
+     */
     public void spawnAsteroideRandom() {
         int tailleRandom = random.nextInt(3);
         switch (tailleRandom) {
@@ -212,6 +211,9 @@ public class Jeu extends BasicGame {
 
     }
 
+    /**
+     * Faire apparaitre des asteroid large
+     */
     public void spawnAsteroideLarge() {
         int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
         int spawnY = random.nextInt(100);
@@ -219,6 +221,9 @@ public class Jeu extends BasicGame {
         listeCollisionnable.add(new Asteroide(spawnX, spawnY, asteroidL.getWidth(), asteroidL.getHeight(), asteroidL));
     }
 
+    /**
+     * Faire apparaitre des asteroide medium
+     */
     public void spawnAsteroideMedium() {
         int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
         int spawnY = random.nextInt(100);
@@ -226,6 +231,9 @@ public class Jeu extends BasicGame {
         listeCollisionnable.add(new Asteroide(spawnX, spawnY, 128, 128, asteroidm));
     }
 
+    /**
+     * Faire apparaitre des asteroid small
+     */
     public void spawnAsteroideSmall() {
         int spawnX = random.nextInt(MainClass.LARGEUR / 2) + MainClass.LARGEUR / 4;
         int spawnY = random.nextInt(100);
@@ -234,13 +242,18 @@ public class Jeu extends BasicGame {
     }
 
 
-    public void collision(Graphics graphics) throws SlickException {
+    /**
+     * S'occupe du traitement des collisions : Asteroide - Vaisseau && Asteroide - Laser
+     *
+     * @throws SlickException
+     */
+    private void collision() throws SlickException {
 
-        Entite laser = null;
-        Entite asteroid = null;
-        Entite vaisseau = null;
-        int aireAsteroid = 0;
-        int aireVaisseau = 0;
+        Entite laser;
+        Entite asteroid;
+        Entite vaisseau;
+        int aireAsteroid;
+        int aireVaisseau;
         for (int i = 0; i < listeEntite.size(); i++) {
             for (int j = 0; j < listeEntite.size(); j++) {
                 if (i != j) {
@@ -250,7 +263,7 @@ public class Jeu extends BasicGame {
                         if (laser.getRectangle().intersects(asteroid.getRectangle())) {
                             if (asteroid.getWidth() > 32)
                                 listeEntite.get(i).setDetruire();
-                            separatioAsteroid(j, i);
+                            separatioAsteroid(j);
                         }
                     }
                     if (listeEntite.get(i) instanceof Vaisseau && listeEntite.get(j) instanceof Asteroide) {
@@ -276,7 +289,11 @@ public class Jeu extends BasicGame {
     }
 
 
-    public void separatioAsteroid(int j, int i) throws SlickException {
+    /**
+     * @param j position dans l'array list
+     * @throws SlickException
+     */
+    public void separatioAsteroid(int j) throws SlickException {
         if (listeEntite.get(j).getImage() == asteroidL) {
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() + 50, listeEntite.get(j).getY(), 128, 128, asteroidm));
             listeEntite.add(new Asteroide(listeEntite.get(j).getX() - 50, listeEntite.get(j).getY(), 128, 128, asteroidm));
@@ -304,6 +321,9 @@ public class Jeu extends BasicGame {
         }
     }
 
+    /**
+     * @param graphics afficher le deroulement du background
+     */
     private void defilerBackground(Graphics graphics) {
         for (int i = 0; i < Largeur; i = i + 600) {
             for (long j = deplacementImage % 700 - 700; j < Hauteur; j = j + 700) {

@@ -1,6 +1,7 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+
 public class Vaisseau extends Entite implements Collisionnable {
     private float vaisseauX = 266;
     private float vaisseauY = 500;
@@ -21,11 +22,25 @@ public class Vaisseau extends Entite implements Collisionnable {
     Image recolteBar4 = new Image("Images/recolteBar/BAR4.png");
     Image recolteBar5 = new Image("Images/recolteBar/BAR5.png");
 
+    /**
+     * @param x         position en x du vaisseau
+     * @param y         position en y du vaisseau
+     * @param width     largeur du vaisseau
+     * @param height    largeur du vaisseau
+     * @param imagepath image du vaisseau
+     * @throws SlickException
+     */
     public Vaisseau(int x, int y, int width, int height, Image imagepath) throws SlickException {
         super(x, y, width, height, imagepath);
     }
 
 
+    /**
+     * @param moving true si le vaisseau bouge
+     * @param direction du vaisseau; 1 = gauche, 3 = droite
+     * @param delta valeur pour le déplacement
+     * @return la potision en x du vaisseau
+     */
     public int deplacementVaisseauX(boolean moving, int direction, int delta) {
 
         if (moving) {
@@ -49,6 +64,13 @@ public class Vaisseau extends Entite implements Collisionnable {
         return Math.round(vaisseauX);
     }
 
+
+    /**
+     * @param moving true si le vaisseau bouge
+     * @param direction du vaisseau; 0 = haut, 2 = bas
+     * @param delta valeur du déplacement
+     * @return la position em y du vaisseau
+     */
     public int deplacementVaisseauY(boolean moving, int direction, int delta) {
 
         if (moving) {
@@ -73,6 +95,9 @@ public class Vaisseau extends Entite implements Collisionnable {
     }
 
 
+    /**
+     * @return image de la barre de vie adequate
+     */
     public Image getHealthBar() {
         if (this.nbVie == 3) {
             return healthBar3;
@@ -88,6 +113,9 @@ public class Vaisseau extends Entite implements Collisionnable {
         return healthBar1;
     }
 
+    /**
+     *  Diminue le nombre de vie
+     */
     public void perteVie() {
         if (!invincible) {
             this.nbVie--;
@@ -97,6 +125,9 @@ public class Vaisseau extends Entite implements Collisionnable {
 
     }
 
+    /**
+     * @param delta valeur de deplacement
+     */
     public void perteInvincibilite(int delta) {
         if (invincible) {
             invincibleTimeout += 0.002 * delta;
@@ -108,6 +139,9 @@ public class Vaisseau extends Entite implements Collisionnable {
         }
     }
 
+    /**
+     * @return Image correspondant à la récolte actuelle
+     */
     public Image getRecolteBar() {
         if (this.nbRecolte == 0) {
             return null;
@@ -125,12 +159,17 @@ public class Vaisseau extends Entite implements Collisionnable {
         return recolteBar1;
     }
 
+
+    /**
+     * @param mineraiCollecte le nombre de minerai collecté
+     */
     public void gainRecolte(int mineraiCollecte) {
         this.nbRecolte += mineraiCollecte;
         if (this.nbRecolte >= 16384) {
             this.nbRecolte = 16384;
         }
     }
+
 
     public void vidageRecolte() {
         int recoltesVidees = this.nbRecolte;
@@ -139,14 +178,23 @@ public class Vaisseau extends Entite implements Collisionnable {
     }
 
 
+    /**
+     * @return score actuelle
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * @return le nombre recolte
+     */
     public int getNbRecolte() {
         return nbRecolte;
     }
 
+    /**
+     * @return le nombre de vie
+     */
     public int getNbVie() {
         return nbVie;
     }

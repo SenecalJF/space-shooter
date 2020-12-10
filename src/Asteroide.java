@@ -12,6 +12,13 @@ public class Asteroide extends Entite implements Collisionnable {
     Random random = new Random();
 
 
+    /**
+     * @param x         position en x d'un asteroide
+     * @param y         position en y d'un asteroide
+     * @param width     largeur de l'asteroide
+     * @param height    hauteur de l'asteroide
+     * @param imagepath image de l'asteroide
+     */
     public Asteroide(int x, int y, int width, int height, Image imagepath) {
         super(x, y, width, height, imagepath);
         int possVit = random.nextInt(4);
@@ -58,6 +65,9 @@ public class Asteroide extends Entite implements Collisionnable {
         }
     }
 
+    /**
+     * @return le rectangle de l'asteroide
+     */
     @Override
     public Rectangle getRectangle() {
 
