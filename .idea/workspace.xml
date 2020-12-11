@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Sound/SpaceSound.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Asteroide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Collisionnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Collisionnable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Laser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Laser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vaisseau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vaisseau.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -153,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607558204146</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Merge branch 'changeJF' of https://github.com/SenecalJF/ca.qc.bdeb.203.TP2.collab into changeJF&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Entite.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Laser.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Vaisseau.class&#10;&#9;src/Asteroide.java&#10;&#9;src/Jeu.java">
+      <created>1607639584029</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1607639584029</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

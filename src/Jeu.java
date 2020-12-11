@@ -21,7 +21,7 @@ public class Jeu extends BasicGame {
     private Laser laser;
     private int yDepart = 0;
     private boolean shooting = false;
-
+    
     //arrayliste
     private ArrayList<Entite> listeEntite = new ArrayList<>();
     private ArrayList<Collisionnable> listeCollisionnable = new ArrayList<>();
