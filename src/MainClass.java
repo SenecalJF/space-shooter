@@ -11,11 +11,15 @@ public class MainClass {
             app.setShowFPS(true); // true for display the numbers of FPS
             app.setVSync(true); // false for disable the FPS synchronize
             app.start();
+
         } catch (SlickException e) {
             e.printStackTrace();
         }
 
     }
+
+
+
 }
 
 /*Ce qu'il reste à faire
@@ -23,10 +27,10 @@ public class MainClass {
   FAIT spritesheet d'une image de nourriture minecraft et les afficher graduellement jusqu'à temps que le vaisseau est plein
   FAIT Defiller l'écran continnuellement
   FAIT Patron Observateur + MVC pour afficher la cargaison envoyé sur mars
-  - Gestion de la mémoire
+  FAIT Gestion de la mémoire
   FAIT Faire recommencer le JEU lorsque ça fini
-  -FAIT Java docs
-  - Word et image d'essai
+  FAIT Java docs
+  FAIT Word et image d'essai
   FAIT Mettre de la musique
 */
 

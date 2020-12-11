@@ -74,12 +74,12 @@ public class Asteroide extends Entite implements Collisionnable {
         if (this.image.getHeight() == 256) {
             return new Rectangle(x, y, 150, 160);
         }
-        if (this.image.getHeight() == 120) {
+        if (this.image.getHeight() == 128) {
             return new Rectangle(x, y, this.width / 3, (this.height / 3) * 2);
         }
         if (this.image.getHeight() == 64) {
             return new Rectangle(x, y, this.width / 3, (this.height / 3) * 2);
         }
-        return new Rectangle(x, y, (this.width / 3) * 2, this.height / 2);
+        return new Rectangle(x, y, (this.width / 3) , this.height / 2);
     }
 }

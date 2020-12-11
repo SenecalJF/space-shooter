@@ -5,6 +5,8 @@ import org.newdawn.slick.*;
 
 import javax.swing.*;
 
+import static java.lang.System.*;
+
 public class Jeu extends BasicGame {
 
     private int vaisseauX = 266;
@@ -74,14 +76,14 @@ public class Jeu extends BasicGame {
         this.asteroidS = new Image("Images/asteroidS/small/Small0.png");
         this.asteroidXS = new Image("Images/asteroidS/Xsmall/Xsmall0.png");
 
-        System.out.println("largeur L : " + asteroidL.getWidth());
-        System.out.println("hauteur L: " + asteroidL.getHeight());
+        out.println("largeur L : " + asteroidL.getWidth());
+        out.println("hauteur L: " + asteroidL.getHeight());
 
-        System.out.println("largeur M : " + asteroidm.getWidth());
-        System.out.println("hauteur M: " + asteroidm.getHeight());
+        out.println("largeur M : " + asteroidm.getWidth());
+        out.println("hauteur M: " + asteroidm.getHeight());
 
-        System.out.println("largeur S : " + asteroidS.getWidth());
-        System.out.println("hauteur S: " + asteroidS.getHeight());
+        out.println("largeur S : " + asteroidS.getWidth());
+        out.println("hauteur S: " + asteroidS.getHeight());
 
 
         //J'ai mit la vie et la recolte dans la classe vaisseau, les methodes getHealth et getRecolte vont retourner les images
@@ -129,7 +131,10 @@ public class Jeu extends BasicGame {
         aAjouter.clear();
 
 
+        System.gc();
+
     }
+
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
@@ -169,7 +174,7 @@ public class Jeu extends BasicGame {
                     listeRecolte.removeAll(listeRecolte);
                     init(gameContainer);
                 } else {
-                    System.exit(0);
+                    exit(0);
                 }
             }
 
@@ -399,5 +404,15 @@ public class Jeu extends BasicGame {
             this.vaisseau.vidageRecolte();
         }
     }
+
+
+    // Confirme la compilation du garbage collector
+    @Override
+    protected void finalize()
+    {
+        System.out.println("Jetage de dechets");
+
+    }
+
 
 }

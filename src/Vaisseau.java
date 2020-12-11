@@ -161,7 +161,7 @@ public class Vaisseau extends Entite implements Collisionnable {
 
 
     /**
-     * @param mineraiCollecte le nombre de minerai collecté
+     * @param mineraiCollecte le nombre de minerai collecté en pixel carre
      */
     public void gainRecolte(int mineraiCollecte) {
         this.nbRecolte += mineraiCollecte;
@@ -171,6 +171,9 @@ public class Vaisseau extends Entite implements Collisionnable {
     }
 
 
+    /**
+     * Vide les ressources et ajoute au score
+     */
     public void vidageRecolte() {
         int recoltesVidees = this.nbRecolte;
         this.nbRecolte = 0;
