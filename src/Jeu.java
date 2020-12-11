@@ -23,7 +23,7 @@ public class Jeu extends BasicGame {
     private Laser laser;
     private int yDepart = 0;
     private boolean shooting = false;
-    
+
     //arrayliste
     private ArrayList<Entite> listeEntite = new ArrayList<>();
     private ArrayList<Collisionnable> listeCollisionnable = new ArrayList<>();
@@ -408,8 +408,7 @@ public class Jeu extends BasicGame {
 
     // Confirme la compilation du garbage collector
     @Override
-    protected void finalize()
-    {
+    protected void finalize() {
         System.out.println("Jetage de dechets");
 
     }
