@@ -42,7 +42,7 @@ public class Jeu extends BasicGame {
 
     private double nouvelAsteroideReady;
 
-    Sound snd;
+    private Sound snd;
 
     /**
      * @param title titre de la page du jeu
@@ -76,17 +76,15 @@ public class Jeu extends BasicGame {
         this.asteroidS = new Image("Images/asteroidS/small/Small0.png");
         this.asteroidXS = new Image("Images/asteroidS/Xsmall/Xsmall0.png");
 
-        out.println("largeur L : " + asteroidL.getWidth());
+        /*out.println("largeur L : " + asteroidL.getWidth());
         out.println("hauteur L: " + asteroidL.getHeight());
 
         out.println("largeur M : " + asteroidm.getWidth());
         out.println("hauteur M: " + asteroidm.getHeight());
 
         out.println("largeur S : " + asteroidS.getWidth());
-        out.println("hauteur S: " + asteroidS.getHeight());
+        out.println("hauteur S: " + asteroidS.getHeight());*/
 
-
-        //J'ai mit la vie et la recolte dans la classe vaisseau, les methodes getHealth et getRecolte vont retourner les images
 
 
         spawnAsteroideLarge();
@@ -145,8 +143,7 @@ public class Jeu extends BasicGame {
         graphics.drawImage(imageVaisseau, vaisseauX, vaisseauY);
 
         //bar de vie
-        if (this.vaisseau.getHealthBar() == null) {
-        } else {
+        if (this.vaisseau.getHealthBar() != null) {
             graphics.drawImage(this.vaisseau.getHealthBar(), 30, 650);
         }
 
@@ -168,6 +165,8 @@ public class Jeu extends BasicGame {
 
 
             if (vaisseau.getNbVie() == 0) {
+                snd.stop();
+
                 if (JOptionPane.showConfirmDialog(null, "Vous n'avez plus de vie malheureusement.\n Voulez-vous recommencer?", "Nouveau Départ", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     listeEntite.removeAll(listeEntite);
                     listeCollisionnable.removeAll(listeCollisionnable);

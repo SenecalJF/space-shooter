@@ -21,14 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="Changement de la hitbox (rectangle) des asteroides">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Asteroide.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Entite.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Laser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/MainClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/MainClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Vaisseau.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$toevaluation_Desforges_Senecal.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607227637715</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changement de la hitbox (rectangle) des asteroides">
+      <created>1607703240086</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1607703240086</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +199,8 @@
     <MESSAGE value="Le laser fonctionne, il faut faire les astéroids et pouvoir les tirer avec le laser" />
     <MESSAGE value="élimination du laser, ajout des asteroids mais ils bougent bizarrement" />
     <MESSAGE value="Merge branch 'changeJF' of https://github.com/SenecalJF/ca.qc.bdeb.203.TP2.collab into changeJF&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Entite.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Laser.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Vaisseau.class&#10;&#9;src/Asteroide.java&#10;&#9;src/Jeu.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'changeJF' of https://github.com/SenecalJF/ca.qc.bdeb.203.TP2.collab into changeJF&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Entite.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Laser.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Vaisseau.class&#10;&#9;src/Asteroide.java&#10;&#9;src/Jeu.java" />
+    <MESSAGE value="Changement de la hitbox (rectangle) des asteroides" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changement de la hitbox (rectangle) des asteroides" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
