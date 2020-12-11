@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="Changement de la hitbox (rectangle) des asteroides">
+    <list default="true" id="724ae6d1-3f09-4a65-87f3-a92c3d36fa58" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ca.qc.bdeb.203.TP2/Jeu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jeu.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607703240086</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="final">
+      <created>1607703838763</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1607703838764</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +206,8 @@
     <MESSAGE value="élimination du laser, ajout des asteroids mais ils bougent bizarrement" />
     <MESSAGE value="Merge branch 'changeJF' of https://github.com/SenecalJF/ca.qc.bdeb.203.TP2.collab into changeJF&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Entite.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Laser.class&#10;&#9;out/production/ca.qc.bdeb.203.TP2/Vaisseau.class&#10;&#9;src/Asteroide.java&#10;&#9;src/Jeu.java" />
     <MESSAGE value="Changement de la hitbox (rectangle) des asteroides" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changement de la hitbox (rectangle) des asteroides" />
+    <MESSAGE value="final" />
+    <option name="LAST_COMMIT_MESSAGE" value="final" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -248,6 +255,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607487020717" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/Jeu.java</url>
+          <line>39</line>
+          <properties field="deplacementImage" class="Jeu" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ca_qc_bdeb_203_TP2_collab$MainClass.ic" NAME="MainClass Coverage Results" MODIFIED="1607481782865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
