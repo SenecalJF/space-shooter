@@ -15,6 +15,9 @@ public class Jeu extends BasicGame {
     private int laserY;
     private int Hauteur = MainClass.HAUTEUR;
     private int Largeur = MainClass.LARGEUR;
+public class Jeu extends BasicGame {
+
+    //YOOOOOOOOOOOO CA MARCHE
 
     private GameContainer gc;
     private Vaisseau vaisseau;
@@ -26,14 +29,9 @@ public class Jeu extends BasicGame {
 
     //arrayliste
     private ArrayList<Entite> listeEntite = new ArrayList<>();
-    private ArrayList<Collisionnable> listeCollisionnable = new ArrayList<>();
-    private ArrayList<Entite> aSuprimer = new ArrayList<>();
-    private ArrayList<Collisionnable> aAjouter = new ArrayList<>();
-    private ArrayList<Image> listeRecolte = new ArrayList<>();
-    //image
     private Image imageVaisseau;
     private Image imageBackground;
-    private Image asteroidL, asteroidm, asteroidS, asteroidXS;
+    private Image laser1;
     private SpriteSheet spriteSheetLaser;
 
 
